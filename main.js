@@ -6,10 +6,14 @@ const getData = () => {
         tickerInput: document.getElementById("ticker-input"),
         sharesInput: document.getElementById("shares-input"),
         nodButton: document.getElementById("nod-button").addEventListener("click", () => { 
-            storedInput.push([inputs.tickerInput.value, inputs.sharesInput.value])
-            console.log(storedInput)
 
-            displayOurData()
+            if (isNaN(inputs.sharesInput.value) || !isNaN(inputs.tickerInput.value)) {
+                outputs.displayDataTicker.innerHTML = 'Must Include A Valid Ticker Name & Number Of Shares'
+            } else {
+                storedInput.push([inputs.tickerInput.value, inputs.sharesInput.value])
+                console.log(storedInput)
+                displayOurData()
+            }
          })
     }
 
@@ -19,7 +23,7 @@ const getData = () => {
     }
 
     const displayOurData = () => {
-        outputs.displayDataTicker.innerHTML = 'Ticker: ' + inputs.tickerInput.value 
+        outputs.displayDataTicker.innerHTML = 'Stock: ' + inputs.tickerInput.value 
         outputs.displayDataShares.innerHTML = 'Shares: ' + inputs.sharesInput.value
         inputs.tickerInput.value = ""
         inputs.sharesInput.value = ""
